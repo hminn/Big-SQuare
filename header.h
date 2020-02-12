@@ -14,6 +14,7 @@ char	**ft_convert_map_arr(char *map);
 int		ft_strlen(char *str);
 int		is_valid_map(char *map);
 void	ft_print(char **map);
+int		is_valid_first(char *map);
 void	ft_2d_int_free(int **obj);
 void	ft_2d_char_free(char **obj);
 void	ft_init_dp_map(int **dp_map);

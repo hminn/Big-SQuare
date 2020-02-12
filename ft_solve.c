@@ -6,7 +6,7 @@
 /*   By: hyeokim <hyeokim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 21:21:23 by hyeokim           #+#    #+#             */
-/*   Updated: 2020/02/12 14:28:01 by hyeokim          ###   ########.fr       */
+/*   Updated: 2020/02/12 21:12:36 by hyeokim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,12 @@ void	ft_solver(char **map)
 	idx = 0;
 	max_value = 0;
 	dp_map = (int **)malloc(sizeof(int *) * (g_line + 1));
-	while (idx <= g_column)
+	while (idx <= g_line)
 		dp_map[idx++] = (int *)malloc(sizeof(int) * (g_column + 1));
 	ft_init_dp_map(dp_map);
 	ft_fill_dp_map(dp_map, map, &max_value, max_coord);
 	ft_convert_map(map, max_value, max_coord);
 	ft_2d_int_free(dp_map);
-	printf("%d / %d / %d \n", max_value, max_coord[0], max_coord[1]);
+	//printf("%d / %d / %d \n", max_value, max_coord[0], max_coord[1]);
 	ft_print(map);	
 }

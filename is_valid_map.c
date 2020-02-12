@@ -6,7 +6,7 @@
 /*   By: hyeokim <hyeokim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 15:45:10 by sjeon             #+#    #+#             */
-/*   Updated: 2020/02/12 03:00:58 by hyeokim          ###   ########.fr       */
+/*   Updated: 2020/02/12 18:08:22 by hyeokim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,20 @@ int		ft_strlen(char *str)
 ** 첫 행에서 숫자로 시작하지 않는 경우 오류처리
 */
 
+int		is_valid_first(char *map)
+{
+	int	temp;
+	int	i;
+
+	i = 0;
+	temp = 0;
+	while (map[i] >= '0' && map[i] <= '9')
+		temp = temp * 10 + (map[i++] - 48);
+	if (!(g_line = temp))
+		return (0);
+	return (temp);
+}
+
 int		is_valid_map(char *map)
 {
 	int	temp;
@@ -81,13 +95,9 @@ int		is_valid_map(char *map)
 	g_obstacle_ch = map[i++];
 	g_full_ch = map[i++];
 	g_first_map_ch = &map[i + 1];
-	if (ft_printable_check())
-		return (1);
-	if (ft_character_check())
-		return (1);
-	if (ft_line_check(&map[i]))
-		return (1);
-	if (ft_obstacle_check(&map[i]))
+
+	if (ft_printable_check() || ft_character_check() ||
+		ft_line_check(&map[i]) || ft_obstacle_check(&map[i]))
 		return (1);
 	return (0);
 }
