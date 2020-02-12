@@ -6,7 +6,7 @@
 /*   By: hyeokim <hyeokim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 21:21:23 by hyeokim           #+#    #+#             */
-/*   Updated: 2020/02/12 10:53:25 by hyeokim          ###   ########.fr       */
+/*   Updated: 2020/02/12 14:28:01 by hyeokim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ extern char	g_empty_ch;
 extern char	g_obstacle_ch;
 extern char g_full_ch;
 
-void	ft_init_dp_map(int dp_map[g_line + 1][g_column + 1])
+void	ft_init_dp_map(int **dp_map)
 {
 	int		i;
 
@@ -30,7 +30,7 @@ void	ft_init_dp_map(int dp_map[g_line + 1][g_column + 1])
 		dp_map[0][i++] = 0;
 }
 
-void	ft_fill_value(int dp_map[g_line + 1][g_column + 1], int row, int col)
+void	ft_fill_value(int **dp_map, int row, int col)
 {
 	int		min;
 
@@ -42,8 +42,7 @@ void	ft_fill_value(int dp_map[g_line + 1][g_column + 1], int row, int col)
 	dp_map[row][col] = min + 1;
 }
 
-void	ft_fill_dp_map(int dp_map[g_line + 1][g_column + 1], char *map[g_line],
-						int *max_value, int *max_coord)
+void	ft_fill_dp_map(int **dp_map, char **map, int *max_value, int *max_coord)
 {
 	int		row;
 	int		col;
@@ -70,7 +69,7 @@ void	ft_fill_dp_map(int dp_map[g_line + 1][g_column + 1], char *map[g_line],
 	}
 }
 
-void	ft_convert_map(char *map[g_line], int max_value, int *max_coord)
+void	ft_convert_map(char **map, int max_value, int *max_coord)
 {
 	int	row;
 	int	col;
@@ -87,20 +86,22 @@ void	ft_convert_map(char *map[g_line], int max_value, int *max_coord)
 	}
 }
 
-void	ft_solver(char *map[g_line])
+void	ft_solver(char **map)
 {
 	int		max_value;
 	int		max_coord[2];
-	int		dp_map[g_line + 1][g_column + 1];
-	int		i;
+	int		**dp_map;
+	int		idx;
 
-	i = 0;
+	idx = 0;
 	max_value = 0;
+	dp_map = (int **)malloc(sizeof(int *) * (g_line + 1));
+	while (idx <= g_column)
+		dp_map[idx++] = (int *)malloc(sizeof(int) * (g_column + 1));
 	ft_init_dp_map(dp_map);
 	ft_fill_dp_map(dp_map, map, &max_value, max_coord);
 	ft_convert_map(map, max_value, max_coord);
+	ft_2d_int_free(dp_map);
 	printf("%d / %d / %d \n", max_value, max_coord[0], max_coord[1]);
-	i = 0;
-	while (i < g_line)
-		printf("%s \n", map[i++]);
+	ft_print(map);	
 }
