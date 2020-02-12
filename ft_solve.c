@@ -6,12 +6,12 @@
 /*   By: hyeokim <hyeokim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 21:21:23 by hyeokim           #+#    #+#             */
-/*   Updated: 2020/02/12 21:12:36 by hyeokim          ###   ########.fr       */
+/*   Updated: 2020/02/13 03:21:14 by hyeokim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
-#include <stdio.h>
+
 extern int	g_line;
 extern int	g_column;
 extern char	g_empty_ch;
@@ -86,12 +86,12 @@ void	ft_convert_map(char **map, int max_value, int *max_coord)
 	}
 }
 
-void	ft_solver(char **map)
+void	ft_solver(char **map, int check, int argc)
 {
-	int		max_value;
-	int		max_coord[2];
-	int		**dp_map;
-	int		idx;
+	int			max_value;
+	int			max_coord[2];
+	int			**dp_map;
+	int			idx;
 
 	idx = 0;
 	max_value = 0;
@@ -102,6 +102,5 @@ void	ft_solver(char **map)
 	ft_fill_dp_map(dp_map, map, &max_value, max_coord);
 	ft_convert_map(map, max_value, max_coord);
 	ft_2d_int_free(dp_map);
-	//printf("%d / %d / %d \n", max_value, max_coord[0], max_coord[1]);
-	ft_print(map);	
+	ft_print(map, check, argc);
 }

@@ -22,13 +22,13 @@ for ((i=0;i<30;i++)); do
 	Time1=$(($Time1 + $(($EndTime - $StartTime))))
 	sleep .5
 	StartTime=$(date +%s)
-	./a.out bsq_test_map > test_result_2
+	./bsq bsq_test_map > test_result_2
 	EndTime=$(date +%s)
 	Time2=$(($Time2 + $(($EndTime - $StartTime))))
 done
 EndTime=$(date +%s)
 echo "나의 bsq는 지도 30개를 검사하는데 $Time1 초 걸림"
-echo "나의 bsq는 지도 30개를 검사하는데 $Time2 초 걸림"
+echo "너의 bsq는 지도 30개를 검사하는데 $Time2 초 걸림"
 echo "두 지도의 차이점은 diff_result에 저장되었습니다."
 diff test_result_1 test_result_2 > diff_result
 rm bsq_test_map test_result_1 test_result_2

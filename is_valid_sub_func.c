@@ -6,22 +6,18 @@
 /*   By: hyeokim <hyeokim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 01:09:35 by sjeon             #+#    #+#             */
-/*   Updated: 2020/02/12 02:26:07 by hyeokim          ###   ########.fr       */
+/*   Updated: 2020/02/13 02:04:55 by hyeokim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-extern int      g_line;
-extern int      g_column;
-extern char     g_empty_ch;
-extern char     g_obstacle_ch;
-extern char     g_full_ch;
-extern char     *g_first_map_ch;
-
-/*
-** 현재 문자의 위치에 개행이 있는지 확인하는 함수
-*/
+extern int		g_line;
+extern int		g_column;
+extern char		g_empty_ch;
+extern char		g_obstacle_ch;
+extern char		g_full_ch;
+extern char		*g_first_map_ch;
 
 int		new_line_check(char idx)
 {
@@ -29,12 +25,6 @@ int		new_line_check(char idx)
 		return (1);
 	return (0);
 }
-
-/*
-** 처음에 개행으로 시작하는지 확인을 하여, 첫행에 숫자 이후 문자 3개가 차례로 왔는지 체크
-** 마지막행의 끝에도 개행문자가 있어야함 / 없으면 오류로 처리
-** 마지막행의 개행문자 이후에 널이 있는 것으로 간주, 이외에 다른 문자가 오면 오류로 처리
-*/
 
 int		ft_line_check(char *map)
 {
@@ -58,10 +48,6 @@ int		ft_line_check(char *map)
 	return (0);
 }
 
-/*
-** 첫행에 언급된 문자로만 이루어졌는지, 모든부분이 obstacle인지 체크
-*/
-
 int		ft_obstacle_check(char *map)
 {
 	int		i;
@@ -83,10 +69,6 @@ int		ft_obstacle_check(char *map)
 	return (0);
 }
 
-/*
-** 주어진 문자가 출력가능한 문자인지 확인
-*/
-
 int		ft_printable_check(void)
 {
 	if (!(g_empty_ch > 31 && g_empty_ch < 127))
@@ -97,10 +79,6 @@ int		ft_printable_check(void)
 		return (1);
 	return (0);
 }
-
-/*
-** 첫 행에 언급된 문자 중 중복이 존재하면 오류
-*/
 
 int		ft_character_check(void)
 {

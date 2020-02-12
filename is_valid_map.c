@@ -6,7 +6,7 @@
 /*   By: hyeokim <hyeokim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 15:45:10 by sjeon             #+#    #+#             */
-/*   Updated: 2020/02/12 18:08:22 by hyeokim          ###   ########.fr       */
+/*   Updated: 2020/02/13 02:03:25 by hyeokim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,7 @@ extern	int		g_column;
 extern	char	g_empty_ch;
 extern	char	g_obstacle_ch;
 extern	char	g_full_ch;
-extern char     *g_first_map_ch;
-
-/*
-** 일차원배열 map을 2차원 동적배열로 변환하는 함수 / 추후에 free 필요
-*/
+extern	char	*g_first_map_ch;
 
 char	**ft_convert_map_arr(char *map)
 {
@@ -61,11 +57,6 @@ int		ft_strlen(char *str)
 	return (i);
 }
 
-/*
-** 주어진 맵이 유효한 맵인지 확인하는 함수
-** 첫 행에서 숫자로 시작하지 않는 경우 오류처리
-*/
-
 int		is_valid_first(char *map)
 {
 	int	temp;
@@ -95,39 +86,8 @@ int		is_valid_map(char *map)
 	g_obstacle_ch = map[i++];
 	g_full_ch = map[i++];
 	g_first_map_ch = &map[i + 1];
-
 	if (ft_printable_check() || ft_character_check() ||
 		ft_line_check(&map[i]) || ft_obstacle_check(&map[i]))
 		return (1);
 	return (0);
 }
-
-// int		main(int argc, char *argv[])
-// {
-// 	char map[] = "3oxf\nooox\nxoxx\nxxxx\n";
-// 	int a;
-// 	char **map_arr;
-// 	a = is_vaild_map(map);
-// 	if (a == 0)
-// 		printf("<<result : GOOD>>\n");
-// 	else
-// 		printf("<<result : NOOO>>\n");
-// 	map_arr = ft_convert_map_arr(g_first_map_ch);
-	
-// 	int i = 0;
-// 	int j = 0;
-// 	int k = 0;
-// 	while (i < g_line)
-// 	{
-// 		j = 0;
-// 		while (j < g_column)
-// 		{
-// 			printf("%c \t", map_arr[i][j]);
-// 			j++;
-// 			k++;
-// 		}
-// 			printf("\n");
-// 		i++;
-// 	}
-// 	return (0);
-// }
