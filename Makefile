@@ -3,25 +3,34 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sjeon <marvin@42.fr>                       +#+  +:+       +#+         #
+#    By: hyeokim <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/02/12 22:51:29 by sjeon             #+#    #+#              #
-#    Updated: 2020/02/13 01:57:14 by sjeon            ###   ########.fr        #
+#    Created: 2020/02/08 15:50:27 by hyeokim           #+#    #+#              #
+#    Updated: 2020/02/13 03:34:35 by hyeokim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
-NAME = BSQ
-OBJ = main.o is_valid_map.o is_valid_func.o ft_solve.o ft_print.o ft_free.o
+NAME	= BSQ
+SRCS	= ft_print.c ft_argv_in.c ft_free.c is_valid_map.c \
+		ft_solve.c ft_stdin.c main.c is_valid_sub_func.c
+OBJS	= ${SRCS:.c=.o}
+CC		= gcc
+OPTIONS = -I includes
+FLAGS	= -Wall -Wextra -Werror
+RM		= rm -f
 
-all : $(NAME)
+.c.o:
+			${CC} ${FLAGS} -I includes -c $< -o ${<:.c=.o}
 
-$(NAME) :
-	$(CC) $(CFLAGS) -o ^@ 
+$(NAME):	${OBJS}
+			${CC} $(OPTIONS) $(FLAGS) $(OBJS) -o $(NAME)
 
-.c.o :
-	$(CC) $(CFLAGS) -c -o $@ $<
+all:		${NAME}
 
-clean :
-	rm *.o $(NAME)
+clean:
+			${RM} ${OBJS}
+
+fclean:		clean
+			${RM} ${NAME}
+
+re:			fclean all
